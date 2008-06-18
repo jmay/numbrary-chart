@@ -1,0 +1,41 @@
+---
+:canvas: 
+  :bgcolor: white
+  :fgcolor: black
+  :height: 400
+  :width: 600
+  :margin:
+    :top: 25
+    :bottom: 75
+    :left: 100
+    :right: 25
+:axes:
+- :position: :bottom
+  :bottom: 1925
+  :top: 2010
+  :min: 1929
+  :max: 2007
+  :intersect: 0
+  :ticks:
+  - 23
+  - 25
+  - 107
+- :position: :left
+  :bottom: 0
+  :top: 12000
+  :min: 673
+  :max: 10412
+  :intersect: 1925
+:layers:
+- :style: :line
+  :color: blue
+  :weight: 3
+  :points:
+  - :x: 1929
+    :y: 673
+  - :x: 1930
+    :y: 725
+  - :x: 1931
+    :y: 894
+  - :x: 2007
+    :y: 10412

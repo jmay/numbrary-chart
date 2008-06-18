@@ -1,0 +1,6 @@
+--- !ruby/object:Dataset::Table 
+columns: 
+- :colnum: 0
+- :colnum: 1
+  :chron: YYYYMM
+- :colnum: 2

@@ -1,0 +1,16 @@
+--- !ruby/object:Dataset::Table 
+columns: 
+- !ruby/object:Dataset::TableColumn 
+  colnum: 0
+  metadata: 
+    :max: 2000
+    :chron: YYYY
+    :min: 2005
+- !ruby/object:Dataset::TableColumn 
+  colnum: 1
+  metadata: 
+    :name: Widgets
+    :number: Units
+    :multiplier:
+constraints: {}
+nrows: 6
