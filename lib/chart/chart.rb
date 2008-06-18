@@ -1,11 +1,10 @@
 module Chart
   class Chart
-    attr_reader :tablespec, :data, :theme
+    attr_reader :tablespec, :theme
     attr_reader :canvas, :chron_axis, :yaxis, :layers
 
     def initialize(args)
       @tablespec = args[:tablespec]
-      @data = args[:data]
       @theme = args[:theme] || Theme::Default.new
     end
 
