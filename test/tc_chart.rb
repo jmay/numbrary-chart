@@ -25,9 +25,9 @@ class TestChart < Test::Unit::TestCase
     assert_not_nil(@chart.theme)
 
     assert_equal(2000, @chart.chron_axis.min.value)
-    assert_equal(2000, @chart.layers[0].bars.first.x.value)
+    # assert_equal(2000, @chart.layers[0].bars.first.x.value)
     assert_equal(2005, @chart.chron_axis.max.value)
-    assert_equal(2005, @chart.layers[0].bars.last.x.value)
+    # assert_equal(2005, @chart.layers[0].bars.last.x.value)
   end
 
   def test_first
@@ -59,9 +59,9 @@ class TestChart < Test::Unit::TestCase
   #   # File.new("out.svg", "w") << renderer.target!
   # end
 
-  def test_layers
-    assert_equal(Chart::Layers::Bar, @chart.layers[0].class)
-  end
+  # def test_layers
+  #   assert_equal(Chart::Layers::Bar, @chart.layers[0].class)
+  # end
 
   # def test_line
   #   assert_equal(Chart::Layers::Line, @chart2.layers[0].class)

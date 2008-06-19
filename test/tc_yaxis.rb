@@ -103,7 +103,7 @@ class TestYAxis < Test::Unit::TestCase
   end
   
   def test_yvals
-    axis = Chart::YAxis.new(@chart)
+    axis = @chart.build.yaxis #Chart::YAxis.new(:chart => @chart, :data => )
     # assert_equal(Dataset::Measure::Units, axis.measure)
     assert_equal(6, axis.yvals.size)
     assert_equal(100, axis.yvals.min)
@@ -145,7 +145,7 @@ class TestYAxis < Test::Unit::TestCase
     dataset = Dataset::Dataset.new(:title => "Negatives")
     dataset.add(series)
     chart = Chart::Chart.new(:dataset => dataset)
-    axis = Chart::YAxis.new(chart)
+    axis = chart.build.yaxis #Chart::YAxis.new(chart)
     assert_equal(20000, axis.interval_size)
     assert_equal(-20000, axis.bottom)
     assert_equal(160000, axis.top)
@@ -159,7 +159,7 @@ class TestYAxis < Test::Unit::TestCase
     dataset = Dataset::Dataset.new(:title => "Percentages")
     dataset.add(series)
     chart = Chart::Chart.new(:dataset => dataset)
-    axis = Chart::YAxis.new(chart)
+    axis = chart.build.yaxis #Chart::YAxis.new(chart)
     assert_equal("0%", axis.ticks.first.label)
     assert_equal("+16%", axis.ticks.last.label)
 
@@ -176,7 +176,7 @@ class TestYAxis < Test::Unit::TestCase
     dataset = Dataset::Dataset.new(:title => "Percentages")
     dataset.add(series)
     chart = Chart::Chart.new(:dataset => dataset)
-    axis = Chart::YAxis.new(chart)
+    axis = chart.build.yaxis #Chart::YAxis.new(chart)
     assert_equal("$0.00", axis.ticks.first.label)
     assert_equal("$3.00", axis.ticks.last.label)
   end

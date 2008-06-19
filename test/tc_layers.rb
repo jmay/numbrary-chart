@@ -6,10 +6,10 @@ class TestLayers < Test::Unit::TestCase
     series.add([2000,100], [2001,101], [2002, 120], [2003, 140], [2004, 130], [2005, 157])
     d = Dataset::Dataset.new(:title => "Test Data").add(series)
     chart = Chart::Chart.new(:dataset => d, :theme => Chart::Theme::Default.new).build
-    @layer = Chart::Layers::Line.new(:chart => chart, :series => series)
+    @layer = Chart::Layer::Line.new(:chart => chart, :series => series)
   end
 
   def test_layer
-    assert_kind_of(Chart::Layers::Line, @layer)
+    assert_kind_of(Chart::Layer::Line, @layer)
   end
 end

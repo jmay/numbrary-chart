@@ -28,7 +28,12 @@ module Chart
     end
 
     def build(chart)
-      @chron = chart.tablespec.chron
+      if chart.tablespec
+        @chron = chart.tablespec.chron
+      end
+      if chart.dataset
+        @chron = chart.dataset.series.first.chron
+      end
       @interval_size = @chron.interval.to_f
       @maximum_intervals = chart.theme.chronaxis.maxticks || 20 # TODO - should be a computed value
 

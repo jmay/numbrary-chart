@@ -8,6 +8,9 @@ describe Chart::Layer::Line, "should support new tablespec structure" do
   end
 
   it "should build layer" do
-    layer = Chart::Layer::Line.new(:chart => @chart, :data => @tablespec.measuredata)
+    layer = Chart::Layer::Line.new(:chart => @chart)
+    layer.points.size.should == 6
+    layer.points.map {|pt| pt[0]}.each {|pt| pt.should be_instance_of(Dataset::Chron::YYYY)}
+    layer.points.map {|pt| pt[1]}.each {|pt| pt.should be_kind_of(Numeric)}
   end
 end

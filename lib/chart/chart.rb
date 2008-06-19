@@ -1,14 +1,38 @@
 module Chart
   class Chart
-    attr_reader :tablespec, :theme
+    attr_reader :theme, :tablespec, :dataset
     attr_reader :canvas, :chron_axis, :yaxis, :layers
 
     def initialize(args)
       @tablespec = args[:tablespec]
+      @dataset = args[:dataset]
       @theme = args[:theme] || Theme::Default.new
     end
 
     def build
+      build_tablespec if @tablespec
+      build_dataset if @dataset
+      self
+    end
+
+    def build_dataset
+      @canvas = Canvas.new(:chart => self)
+
+      chrondata = []
+      @dataset.series.each { |series| chrondata << series.data.map {|e| e[:chron]} }
+      @chron_axis = ChronAxis.new(:chart => self, :data => chrondata)
+
+      measuredata = []
+      @dataset.series.each { |series| measuredata << series.data.map {|e| e[:measure]} }
+      @yaxis = YAxis.new(:chart => self, :data => measuredata)
+
+      @layers = []
+      @dataset.series.each do |series|
+        @layers << Layer::Line.new(:chart => self, :series => series)
+      end
+    end
+
+    def build_tablespec
       @canvas = Canvas.new(:chart => self)
 
       if @tablespec.chron?
@@ -18,12 +42,10 @@ module Chart
       @layers = []
       if @tablespec.measure?
         @yaxis = YAxis.new(:chart => self, :data => @tablespec.measuredata)
-        @layers << Layer::Line.new(:chart => self, :series => @tablespec.measuredata)
+        @layers << Layer::Line.new(:chart => self)
       end
 
       # TODO: multiple layers
-
-      self
     end
   end
 end

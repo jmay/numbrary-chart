@@ -13,13 +13,19 @@ module Chart
     def initialize(args)
       @chart = args[:chart]
       @data = args[:data]
-      @measure = @chart.tablespec.measure
+      if @chart.tablespec
+        @measure = @chart.tablespec.measure
+        super(@data)
+      end
+      if @chart.dataset
+        @measure = @chart.dataset.series.first.measure
 
-#       @yvals = []
-# #       chart.dataset.series[0].data.each { |e| @yvals << e[:measure].value if e[:chron] >= chart.constraints[:from] }
-#       chart.dataset.series[0].data.each { |e| @yvals << e[:measure] if e[:chron] >= chart.constraints[:from] && e[:chron] <= chart.constraints[:to] }
-      # @yvals = chart.dataset.series.collect { |series| series.data.map { |e| e[:measure].value } }.flatten.sort.uniq
-      super(chart.tablespec.measuredata)
+        @yvals = []
+        # chart.dataset.series[0].data.each { |e| @yvals << e[:measure].value if e[:chron] >= chart.constraints[:from] }
+        chart.dataset.series[0].data.each { |e| @yvals << e[:measure] } #if e[:chron] >= chart.constraints[:from] && e[:chron] <= chart.constraints[:to] }
+        # @yvals = chart.dataset.series.collect { |series| series.data.map { |e| e[:measure].value } }.flatten.sort.uniq
+        super(@yvals)
+      end
       include_zero #unless @measure.rate?
       compute_ticks
       # add_data(@yvals)
@@ -76,8 +82,8 @@ module Chart
       bottom.upto(top, :by => interval_size) {|tick| @tick_positions << tick}
       decide_label_format
       @ticks = []
-      # bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.format(tick, @format_hints))}
-      bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.units.new(tick, @format_hints).to_s)}
+      bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.format(tick, @format_hints))}
+      # bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.units.new(tick, @format_hints).to_s)}
     end
 
     def scale_vertical(v, r)

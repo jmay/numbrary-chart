@@ -5,6 +5,7 @@ module Chart
 
     def initialize(args)
       @chart = args[:chart]
+      @series = args[:series]
       # @data = args[:data]
     end
   end
@@ -74,11 +75,17 @@ module Chart
     def initialize(args)
       super
 
-      chron_colnum = chart.tablespec.chron_column.colnum
-      measure_colnum = chart.tablespec.measure_column.colnum
-      @points = chart.tablespec.rows.map {|row| row.values_at(chron_colnum, measure_colnum)}
+      if chart.tablespec
+        chron_colnum = chart.tablespec.chron_column.colnum
+        measure_colnum = chart.tablespec.measure_column.colnum
+        @points = chart.tablespec.rows.map {|row| [row[chron_colnum], row[measure_colnum].value]}
+      end
 
-      # series.data.each { |e| @points << [ e[:chron], e[:measure] ] if e[:chron] >= chart.constraints[:from] && e[:chron] <= chart.constraints[:to] }
+      if chart.dataset
+        @points = []
+        # @series.data.each { |e| @points << [ e[:chron], e[:measure] ] if e[:chron] >= chart.constraints[:from] && e[:chron] <= chart.constraints[:to] }
+        @series.data.each { |e| @points << [ e[:chron], e[:measure] ] }
+      end
     end
 
     def render(r)

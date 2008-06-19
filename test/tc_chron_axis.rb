@@ -140,7 +140,7 @@ EOT
 
   def test_limit_axis_ticks
     dataset = Dataset::Dataset.new(:source => Dataset::Source.new(:text => testdata("manu_orders.csv")))
-    puts dataset.series.map{|ser| ser.chron}
+    # puts dataset.series.map{|ser| ser.chron}
     chart = Chart::Chart.new(:dataset => dataset).build
     ticks = chart.chron_axis.ticks
     assert(ticks.size <= chart.theme.chronaxis.maxticks)
