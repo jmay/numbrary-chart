@@ -84,7 +84,7 @@ module Chart
       if chart.dataset
         @points = []
         # @series.data.each { |e| @points << [ e[:chron], e[:measure] ] if e[:chron] >= chart.constraints[:from] && e[:chron] <= chart.constraints[:to] }
-        @series.data.each { |e| @points << [ e[:chron], e[:measure] ] }
+        @series.data.sort_by {|e| e[:chron]}.each { |e| @points << [ e[:chron], e[:measure] ] }
       end
     end
 
