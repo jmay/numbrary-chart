@@ -15,7 +15,7 @@ end
 
 spec = Gem::Specification.new do |s| 
   s.name = "chart"
-  s.version = "0.2"
+  s.version = "0.3"
   s.author = "Jason May"
   s.email = "jmay@numbrary.com"
   s.homepage = "http://numbrary.com/"
@@ -26,7 +26,7 @@ spec = Gem::Specification.new do |s|
   s.test_files = FileList["{test}/**/*test.rb"].to_a
   s.has_rdoc = false # please document me
   # s.extra_rdoc_files = ["README"]
-  s.add_dependency("dataset", ">= 0.7")
+  s.add_dependency("dataset", ">= 0.8")
   s.rubyforge_project = nil # this isn't going out to the world
 end
  

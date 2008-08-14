@@ -5,7 +5,7 @@ describe "layer constructed from tablespec" do
     @tablespec = YAML.load(testdata('annual_data.yaml'))
     @tablespec.read(File.dirname(__FILE__) + '/testdata/annual_data.nsf') # source has shuffled chron order
     @chart = Chart::Chart.new(:tablespec => @tablespec)
-    @layer = Chart::Layer::Line.new(:chart => @chart)
+    @layer = Chart::Layer::Line.new(:chart => @chart, :column => @tablespec.measure_column)
   end
 
   it "should have a point for every data value" do

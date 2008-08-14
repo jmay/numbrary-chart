@@ -22,7 +22,7 @@ module Chart
     end
 
     def add_data(*ary)
-      @elements += ary.flatten
+      @elements += ary.flatten.compact
       @max = @elements.max.to_f
       @min = @elements.min.to_f
       calculate

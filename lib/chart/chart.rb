@@ -39,10 +39,15 @@ module Chart
         @chron_axis = ChronAxis.new(:chart => self, :data => @tablespec.chrondata)
       end
 
+      ydata = []
+      @tablespec.measure_columns.each do |column|
+        ydata.concat(@tablespec.rows.map {|row| row[column.colnum]}.compact)
+      end
+      @yaxis = YAxis.new(:chart => self, :data => ydata)
+
       @layers = []
-      if @tablespec.measure?
-        @yaxis = YAxis.new(:chart => self, :data => @tablespec.measuredata)
-        @layers << Layer::Line.new(:chart => self)
+      @tablespec.measure_columns.each do |column|
+        @layers << Layer::Line.new(:chart => self, :column => column)
       end
 
       # TODO: multiple layers

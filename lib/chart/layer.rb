@@ -77,8 +77,8 @@ module Chart
 
       if chart.tablespec
         chron_colnum = chart.tablespec.chron_column.colnum
-        measure_colnum = chart.tablespec.measure_column.colnum
-        @points = chart.tablespec.rows.map {|row| [row[chron_colnum], row[measure_colnum].value]}.sort
+        measure_colnum = args[:column].colnum
+        @points = chart.tablespec.rows.reject {|row| row[measure_colnum].nil?}.map {|row| [row[chron_colnum], row[measure_colnum].value]}.sort
       end
 
       if chart.dataset
