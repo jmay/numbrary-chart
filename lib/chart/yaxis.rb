@@ -27,9 +27,11 @@ module Chart
         super(@yvals)
       end
       include_zero #unless @measure.rate?
+
+      self.maximum_intervals = chart.theme.yaxis.maxticks
+
       compute_ticks
       # add_data(@yvals)
-      self.maximum_intervals = 10 # TODO - should be a computed value
     end
 
     def decide_label_format

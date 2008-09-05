@@ -5,15 +5,17 @@ module Chart
     Bars = Struct.new("Bars", :gap)
     DataArea = Struct.new("DataArea", :width, :height)
     ChronAxis = Struct.new("ChronAxis", :maxticks)
+    YAxis = Struct.new("YAxis", :maxticks)
 
     class Base
-      attr_accessor :canvas, :axes, :bars, :chronaxis
+      attr_accessor :canvas, :axes, :bars, :chronaxis, :yaxis
 
       def initialize
         @canvas = Canvas.new
         @axes = Axes.new
         @bars = Bars.new
         @data_area = nil
+        @yaxis = YAxis.new
         @chronaxis = ChronAxis.new
         # @canvas = args[:canvas] || {}
         # @axes = args[:axes] || {}
@@ -42,18 +44,35 @@ module Chart
     class Default < Base
       def initialize
         super
-        canvas.width = 800
-        canvas.height = 400
+        canvas.width = 600
+        canvas.height = 300
         canvas.margin = 0.12
         canvas.top_margin = 25
         canvas.title_font_size = 25
         axes.tick_length = 5
         axes.font_size = 10
         bars.gap = 0.0
+        yaxis.maxticks = 12
         chronaxis.maxticks = 12
         # super(:canvas => { :width => 800, :height => 400, :margin => 0.12 },
         #       :axes => { :tick_length => 5, :font_size => 8 },
         #       :bars => { :width => 100, :gap => 0.0 })
+      end
+    end
+
+    class Thumbnail < Base
+      def initialize
+        super
+        canvas.width = 250
+        canvas.height = 125
+        canvas.margin = 0.12
+        canvas.top_margin = 10
+        canvas.title_font_size = 10
+        axes.tick_length = 2
+        axes.font_size = 8
+        bars.gap = 0.0
+        yaxis.maxticks = 6
+        chronaxis.maxticks = 6
       end
     end
   end

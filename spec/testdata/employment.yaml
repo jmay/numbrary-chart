@@ -1,0 +1,24 @@
+--- !ruby/object:Dataset::Table 
+columns: 
+- !ruby/object:Dataset::TableColumn 
+  colnum: 0
+  data: []
+
+  metadata: 
+    :max: 24102
+    :chron: YYYYMM
+    :min: 23376
+- !ruby/object:Dataset::TableColumn 
+  colnum: 1
+  data: []
+
+  metadata: 
+    :max: 146647
+    :name: Employment Level
+    :units: People
+    :multiplier: 
+    :min: 57172
+    :number: Units
+constraints: {}
+
+nrows: 727

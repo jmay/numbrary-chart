@@ -1,0 +1,20 @@
+--- !ruby/object:Dataset::Table 
+columns: 
+- !ruby/object:Dataset::TableColumn 
+  colnum: 0
+  metadata: 
+    :min: 2000
+    :chron: YYYY
+    :max: 2006
+- !ruby/object:Dataset::TableColumn 
+  colnum: 1
+  metadata: 
+    :name: Shipments
+    :number: Units
+- !ruby/object:Dataset::TableColumn 
+  colnum: 2
+  metadata: 
+    :name: Backlog
+    :number: Units
+constraints: {}
+nrows: 7
