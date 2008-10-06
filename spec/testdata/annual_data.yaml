@@ -10,7 +10,8 @@ columns:
   colnum: 1
   metadata: 
     :name: Widgets
-    :number: Units
+    :number: Dollars
+    :decimals: 0
     :multiplier:
 constraints: {}
 nrows: 6

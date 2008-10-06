@@ -15,7 +15,7 @@ end
 
 spec = Gem::Specification.new do |s| 
   s.name = "chart"
-  s.version = "0.3"
+  s.version = "0.4"
   s.author = "Jason May"
   s.email = "jmay@numbrary.com"
   s.homepage = "http://numbrary.com/"

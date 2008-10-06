@@ -87,14 +87,14 @@ class Float
   end
 
   def upto(high, opts = {})
-    n = self
-    step = opts[:by] || 1.0
-    while n < high - 0.0001   # need this adjustment because these are floats
-      yield n
+    n = BigDecimal.new(self.to_s)
+    step = BigDecimal.new((opts[:by] || 1.0).to_s)
+    while n < BigDecimal.new(high.to_s) - BigDecimal.new('0.0001')   # need this adjustment because these are floats
+      yield n.to_f
       n += step
     end
     # include the overshoot value, so that the high value is guaranteed to be <= the last tick
-    yield n
+    yield n.to_f
   end
   
   def commas

@@ -85,6 +85,10 @@ module Chart
         @chron = Dataset::Chron::YYYY
       end
 
+      if chron == Dataset::Chron::YYYYQ && interval >= 1.0
+        @chron = Dataset::Chron::YYYY
+      end
+
       tick_values = []
       x = chrons.first.value.round_down(interval)
       while x <= chrons.last.value.round_up(interval) do

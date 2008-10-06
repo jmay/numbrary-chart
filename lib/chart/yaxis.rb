@@ -6,6 +6,8 @@
 
 # require "axis"
 
+require "bigdecimal"
+
 module Chart
   class YAxis < Axis
     attr_reader :ticks, :line, :legend, :yvals, :measure, :chart
@@ -35,6 +37,23 @@ module Chart
     end
 
     def decide_label_format
+      @format_units = @measure.units
+      @format_units = @format_units.dup
+      @format_units.options ||= {}
+
+      # figure out the needed number of decimals based on the values themselves
+      interval = length.to_f / (@tick_positions.size - 1)
+      if interval.to_s =~ /\.0+$/
+        @format_units.options[:decimals] = 0
+      else
+        @format_units.options[:decimals] = 1
+      end
+
+      # TODO: for the special case of Y=0, probably don't want to show decimals, even if rest of ticks have them
+      # TODO: for "change in X" measures, should put a + before positive values
+    end
+
+    def decide_label_format_old
       @format_hints = {}
       if @measure.change? then
         @format_hints[:sign] = true
@@ -84,7 +103,8 @@ module Chart
       bottom.upto(top, :by => interval_size) {|tick| @tick_positions << tick}
       decide_label_format
       @ticks = []
-      bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.format(tick, @format_hints))}
+      # bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.format(tick, @format_hints))}
+      bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @format_units.new(tick).to_s)}
       # bottom.upto(top, :by => interval_size) {|tick| @ticks << Tick.new(self, tick, @measure.units.new(tick, @format_hints).to_s)}
     end
 
