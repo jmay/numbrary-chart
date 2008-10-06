@@ -20,7 +20,7 @@ describe Chart::YAxis, "should support new tablespec structure" do
 end
 
 describe "Y Axis in percent" do
-  it "percentage axis ticks should be labelled with single decimal" do
+  it "should be labelled with single decimal" do
     @tablespec = YAML.load(testdata('percent_data.yaml'))
     @tablespec.read(File.dirname(__FILE__) + '/testdata/percent_data.nsf')
     @chart = Chart::Chart.new(:tablespec => @tablespec)
@@ -31,12 +31,23 @@ describe "Y Axis in percent" do
     # axis.ticks.map(&:label).should == ["-1.5%", "-1.0%", "-0.5%", "0%", "+0.5%", "+1.0%", "+1.5%", "+2.0%"]
   end
 
-  it "percentage axis ticks should be labelled with no sign on Y=0" do
+  it "should be labelled with no sign on Y=0" do
     @tablespec = YAML.load(testdata('percent_data.yaml'))
     @tablespec.read(File.dirname(__FILE__) + '/testdata/percent_data2.nsf')
     @chart = Chart::Chart.new(:tablespec => @tablespec)
 
     axis = Chart::YAxis.new(:chart => @chart, :data => @tablespec.measuredata)
     axis.ticks.map(&:label).should == ["-0.3%", "-0.2%", "-0.1%", "0.0%", "0.1%", "0.2%", "0.3%", "0.4%", "0.5%"]
+  end
+end
+
+describe "Y axis in index values" do
+  it "should be labelled with no decimals" do
+    tablespec = YAML.load(testdata('index_data.yaml'))
+    tablespec.read(File.dirname(__FILE__) + '/testdata/index_data.nsf')
+    chart = Chart::Chart.new(:tablespec => tablespec)
+
+    axis = Chart::YAxis.new(:chart => chart, :data => tablespec.measuredata)
+    axis.ticks.map(&:label).should == ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
   end
 end
