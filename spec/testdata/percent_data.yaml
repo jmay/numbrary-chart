@@ -1,0 +1,15 @@
+--- !ruby/object:Dataset::Table 
+columns: 
+- !ruby/object:Dataset::TableColumn 
+  colnum: 0
+  metadata: 
+    :chron: YYYYMM
+- !ruby/object:Dataset::TableColumn 
+  colnum: 1
+  metadata: 
+    :name: Change in unemployment
+    :number: Percent
+    :decimals: 3
+    :max: 1.9885
+    :min: -1.4432
+constraints: {}

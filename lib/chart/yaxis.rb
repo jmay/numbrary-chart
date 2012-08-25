@@ -82,15 +82,14 @@ module Chart
     end
 
     def tick_label_reductions
-      case
-        when top > 1.billion:
-          @format_hints[:divide_by] = :billion
-          @format_hints[:decimals] = 0
-        when top > 1.million:
-          @format_hints[:divide_by] = :million
-          @format_hints[:decimals] = 0
-        when top > 100
-          @format_hints[:decimals] = 0
+      if top > 1.billion
+        @format_hints[:divide_by] = :billion
+        @format_hints[:decimals] = 0
+      elsif top > 1.million
+        @format_hints[:divide_by] = :million
+        @format_hints[:decimals] = 0
+      elsif top > 100
+        @format_hints[:decimals] = 0
       end
     end
 

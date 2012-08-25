@@ -80,9 +80,12 @@ class Float
   def reduce_interval
     oom = self.order_of_magnitude - 1
     case (self.to_f / 10**oom)
-      when 5: 2 * 10**oom
-      when 2: 1 * 10**oom
-      when 1: 5 * 10**(oom-1)
+    when 5
+      2 * 10**oom
+    when 2
+      1 * 10**oom
+    when 1
+      5 * 10**(oom-1)
     end
   end
 

@@ -1,0 +1,15 @@
+--- !ruby/object:Dataset::Table 
+columns: 
+- !ruby/object:Dataset::TableColumn 
+  colnum: 0
+  metadata: 
+    :chron: YYYYQ
+- !ruby/object:Dataset::TableColumn 
+  colnum: 1
+  metadata: 
+    :name: GDP index
+    :number: Index
+    :decimals: 3
+    :min: 15.972
+    :max: 119.201
+constraints: {}
