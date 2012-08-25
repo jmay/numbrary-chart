@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 describe Chart::Chart, "should support new tablespec structure" do
   before(:all) do
     @tablespec = YAML.load(testdata('annual_data.yaml'))
-    @tablespec.read(File.dirname(__FILE__) + '/testdata/annual_data.nsf')
+    @tablespec.read(File.expand_path('../testdata/annual_data.nsf', __FILE__))
     @chart = Chart::Chart.new(:tablespec => @tablespec)
   end
 

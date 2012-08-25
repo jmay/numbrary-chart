@@ -41,7 +41,7 @@ module Chart
 
       ydata = []
       @tablespec.measure_columns.each do |column|
-        ydata.concat(@tablespec.rows.map {|row| row[column.colnum]}.compact)
+        ydata.concat(@tablespec.rows.map {|row| row[column.colnum]}.compact.map(&:value))
       end
       @yaxis = YAxis.new(:chart => self, :data => ydata)
 
